@@ -32,3 +32,5 @@ describe('Teste a função fetchProductsList', () => {
     }
   });
 });
+
+// documentação do tratamento do erro: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Error
