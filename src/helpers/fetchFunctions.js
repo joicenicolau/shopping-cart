@@ -8,7 +8,7 @@ export const fetchProduct = async (id) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    return error.message;
+    return error;
   }
 };
 
@@ -22,6 +22,6 @@ export const fetchProductsList = async (product) => {
     const data = await response.json();
     return data.results;
   } catch (error) {
-    return error.message;
+    return error;
   }
 };

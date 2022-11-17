@@ -25,12 +25,6 @@ describe('Teste a função fetchProductsList', () => {
   });
 
   it('teste se ao chamar fetchProductsList sem argumento, retorna um erro com a mensagem', async() => {
-    try {
-    await fetchProductsList();
-    } catch (error) {
-      expect(error).toEqual(new Error('Termo de busca não informado'));
-    }
+    return expect(fetchProductsList()).rejects.toThrow('Termo de busca não informado');
   });
 });
-
-// documentação do tratamento do erro: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Error

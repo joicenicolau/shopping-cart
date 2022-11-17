@@ -8,6 +8,11 @@ describe('Teste a função fetchProduct', () => {
     expect(typeof fetchProduct).toBe('function');
   });
 
+  it('fetch é chamado ao executar fetchProduct', async() => {
+    await fetchProduct('MLB1405519561');
+    expect(fetch).toHaveBeenCalled();
+  });
+
   it('fetch é chamado com o endpoint correto ao executar fetchProduct', async() => {
     await fetchProduct('MLB1405519561');
     const endpoint = 'https://api.mercadolibre.com/items/MLB1405519561';
@@ -20,10 +25,6 @@ describe('Teste a função fetchProduct', () => {
   });
 
   it('teste se ao chamar fetchProduct sem argumento, retorna um erro com a mensagem', async() => {
-    try {
-    await fetchProduct();
-    } catch (error) {
-      expect(error).toEqual(new Error('ID não informado'));
-    }
-  });
+    return expect(fetchProduct()).rejects.toThrow('ID não informado');
+    });
 });
