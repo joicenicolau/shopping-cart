@@ -126,7 +126,7 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
   cartButton.addEventListener('click', async () => {
     saveCartID(id); // Dica da Maysa na monitoria de manhã - trazer a função do local storage com o param que o requisito quer - id (da createProduct..)
     const armazFetchProd = await fetchProduct(id);
-    const getProd = document.querySelector('.cart__products'); // seleciona a class que o readme solicita
+    const getProd = document.querySelector('.cart__products'); // seleciona a class que o readme solicita - tem que ser filho dela
     getProd.appendChild(createCartProductElement(armazFetchProd)); // a função createCart.. cria uma li no carrinho de compras e a class que solicitei acima, então adicionei os produtos que a fetchProduct retorna nela. Dessa forma,faz aparecer os produtos no carrinho.
   });
   section.appendChild(cartButton);
