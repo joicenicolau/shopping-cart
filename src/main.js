@@ -9,7 +9,7 @@ const getClassProduct = document.querySelector('.products');
 
 const criaTextoCarregando = () => {
   const criaParagrafo = document.createElement('p');
-  criaParagrafo.innerText = 'carregando...';
+  criaParagrafo.textContent = 'carregando...';
   criaParagrafo.className = 'loading';
   getClassProduct.appendChild(criaParagrafo);
 };
@@ -19,12 +19,22 @@ const removeLoadingClass = () => {
   apagaClassLoading.remove();
 };
 
-const functionCreateList = async () => {
-  criaTextoCarregando();
-  const amazenaFetchProductsList = await fetchProductsList('computador');
-  removeLoadingClass();
-  amazenaFetchProductsList.forEach((el) => {
-    getClassProduct.appendChild(createProductElement(el));
-  });
+const erroApi = () => {
+  getClassProduct.className = 'error';
+  getClassProduct.innerHTML = 'Algum erro ocorreu, recarregue a página e tente novamente';
 };
+
+const functionCreateList = async () => {
+  try {
+    const amazenaFetchProductsList = await fetchProductsList('computador');
+    amazenaFetchProductsList.forEach((el) => {
+      getClassProduct.appendChild(createProductElement(el));
+    });
+    removeLoadingClass();
+  } catch (error) {
+    erroApi();
+  }
+};
+
+criaTextoCarregando();
 functionCreateList();

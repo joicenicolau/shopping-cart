@@ -9,7 +9,7 @@ describe('Teste a função fetchProductsList', () => {
   });
 
   it('fetch é chamado ao executar fetchProductsList', async() => {
-    await fetchProductsList();
+    await fetchProductsList('computador');
     expect(fetch).toHaveBeenCalled();
   });
 
