@@ -1,4 +1,5 @@
-import { removeCartID } from './cartFunctions';
+import { removeCartID, saveCartID } from './cartFunctions';
+import { fetchProduct } from './fetchFunctions';
 
 // Esses comentários que estão antes de cada uma das funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
@@ -121,6 +122,13 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     'product__add',
     'Adicionar ao carrinho!',
   );
+
+  cartButton.addEventListener('click', async () => {
+    saveCartID(id); // Dica da Maysa na monitoria de manhã - trazer a função do local storage com o param que o requisito quer - id (da createProduct..)
+    const armazFetchProd = await fetchProduct(id);
+    const getProd = document.querySelector('.cart__products'); // seleciona a class que o readme solicita
+    getProd.appendChild(createCartProductElement(armazFetchProd)); // a função createCart.. cria uma li no carrinho de compras e a class que solicitei acima, então adicionei os produtos que a fetchProduct retorna nela. Dessa forma,faz aparecer os produtos no carrinho.
+  });
   section.appendChild(cartButton);
 
   return section;
