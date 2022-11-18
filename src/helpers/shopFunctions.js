@@ -6,6 +6,19 @@ import { fetchProduct } from './fetchFunctions';
 
 // Fique a vontade para modificar o código já escrito e criar suas próprias funções!
 
+// Criar função que atualiza preço e função que remove
+const criaValoresDeProdutos = (price) => {
+  const getTotalPrice = document.querySelector('.total-price'); // seleciona a class
+  let total = Number(getTotalPrice.innerHTML); // armazena o valor da class. Como ela é string, transformei em numero
+  total += price; // soma o valor que armazenado na class com o valor passado no param
+  getTotalPrice.innerHTML = total.toFixed(2); // retorna na tela com o valor com 2 digitos após a vírgula.
+};
+
+// const removeValoresdeProduto = () => {
+//   const apagaValores = document.querySelector('.total-price');
+//   apagaValores.remove();
+// };
+
 /**
  * Função responsável por criar e retornar o elemento de imagem do produto.
  * @param {string} imageSource - URL da imagem.
@@ -46,9 +59,10 @@ export const getIdFromProduct = (product) => (
  * @param {Element} li - Elemento do produto a ser removido do carrinho.
  * @param {string} id - ID do produto a ser removido do carrinho.
  */
-const removeCartProduct = (li, id) => {
+const removeCartProduct = (li, id, price) => {
   li.remove();
   removeCartID(id);
+  criaValoresDeProdutos(-price); // Colocar um menos na frente do parametro para remover o valor do obj do carrinho - Dica de Filipe Bueno.
 };
 
 /**
@@ -88,7 +102,9 @@ export const createCartProductElement = ({ id, title, price, pictures }) => {
   );
   li.appendChild(removeButton);
 
-  li.addEventListener('click', () => removeCartProduct(li, id));
+  li.addEventListener('click', () => removeCartProduct(li, id, price));
+  criaValoresDeProdutos(price);
+  // removeValoresdeProduto();
   return li;
 };
 
